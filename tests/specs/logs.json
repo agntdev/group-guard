@@ -1,14 +1,14 @@
 [
   {
-    "name": "/summary shows no activity when empty",
+    "name": "/logs shows no logs when empty",
     "steps": [
       {
-        "send": { "text": "/summary" },
+        "send": { "text": "/logs" },
         "expect": [
           {
             "method": "sendMessage",
             "payload": {
-              "text": "📊 No moderation activity to report yet."
+              "text": "📜 No moderation logs yet."
             }
           }
         ]
@@ -16,10 +16,10 @@
     ]
   },
   {
-    "name": "admin:summary button shows no activity",
+    "name": "admin:logs button shows no logs",
     "steps": [
       {
-        "send": { "callback": "admin:summary" },
+        "send": { "callback": "admin:logs" },
         "expect": [
           {
             "method": "answerCallbackQuery"
@@ -27,7 +27,7 @@
           {
             "method": "editMessageText",
             "payload": {
-              "text": "📊 No moderation activity to report yet."
+              "text": "📜 No moderation logs yet."
             }
           }
         ]

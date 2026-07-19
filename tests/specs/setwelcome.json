@@ -1,0 +1,53 @@
+[
+  {
+    "name": "/setwelcome with quoted message",
+    "steps": [
+      {
+        "send": { "text": "/setwelcome \"Welcome to our group!\"" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "✅ Welcome message updated."
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "/setwelcome without args shows usage",
+    "steps": [
+      {
+        "send": { "text": "/setwelcome" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "Usage: /setwelcome \"Your welcome message\""
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "admin:setwelcome button shows current welcome",
+    "steps": [
+      {
+        "send": { "callback": "admin:setwelcome" },
+        "expect": [
+          {
+            "method": "answerCallbackQuery"
+          },
+          {
+            "method": "editMessageText",
+            "payload": {
+              "text": "Current welcome message:\n\"Welcome to the group! Please verify you're human.\"\n\nTo change it, type:\n/setwelcome \"Your new message\""
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

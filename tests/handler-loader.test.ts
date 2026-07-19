@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { readFileSync } from "node:fs";
 import { buildBot } from "../src/bot.js";
+import { initDurable } from "../src/durable.js";
 import { runSpecs, parseBotSpec } from "../src/toolkit/index.js";
 
 describe("buildBot handler loader", () => {
@@ -9,13 +10,13 @@ describe("buildBot handler loader", () => {
       readFileSync(new URL("./specs/start.json", import.meta.url), "utf8"),
     ) as unknown[];
     const specs = raw.map(parseBotSpec);
-    const suite = await runSpecs(() => buildBot("test-token"), specs);
+    const suite = await runSpecs(() => { initDurable(); return buildBot("test-token"); }, specs);
     expect(suite.failed).toBe(0);
     expect(suite.passed).toBeGreaterThan(0);
   });
 
   it("unknown input falls through to the global fallback", async () => {
-    const suite = await runSpecs(() => buildBot("test-token"), [
+    const suite = await runSpecs(() => { initDurable(); return buildBot("test-token"); }, [
       parseBotSpec({
         name: "unknown text hits the fallback",
         steps: [

@@ -1,0 +1,69 @@
+[
+  {
+    "name": "/setauto with type and action",
+    "steps": [
+      {
+        "send": { "text": "/setauto duplicate mute" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "✅ Auto action updated.\nduplicate → mute"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "/setauto without args shows usage",
+    "steps": [
+      {
+        "send": { "text": "/setauto" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "Usage: /setauto <spam_type> <action>\n\nSpam types: new_account_link, duplicate, flood\nActions: warn, mute, kick, ban"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "/setauto with invalid type",
+    "steps": [
+      {
+        "send": { "text": "/setauto invalid warn" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "Unknown spam type: \"invalid\".\n\nValid types: new_account_link, duplicate, flood"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "admin:setauto button shows current settings",
+    "steps": [
+      {
+        "send": { "callback": "admin:setauto" },
+        "expect": [
+          {
+            "method": "answerCallbackQuery"
+          },
+          {
+            "method": "editMessageText",
+            "payload": {
+              "text": "🤖 Auto-moderation actions:\n\n• New account links: warn\n• Duplicate messages: warn\n• Message flood: mute\n\nTo change, type:\n/setauto <type> <action>\n\nTypes: new_account_link, duplicate, flood\nActions: warn, mute, kick, ban"
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

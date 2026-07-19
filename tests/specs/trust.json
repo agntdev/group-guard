@@ -1,14 +1,14 @@
 [
   {
-    "name": "/warn with user and reason",
+    "name": "/trust add with user",
     "steps": [
       {
-        "send": { "text": "/warn @spammer spamming links" },
+        "send": { "text": "/trust add @trusted_user" },
         "expect": [
           {
             "method": "sendMessage",
             "payload": {
-              "text": "⚠️ Warning recorded for @spammer.\nReason: spamming links"
+              "text": "🛡️ @trusted_user has been added to the trust list."
             }
           }
         ]
@@ -16,15 +16,15 @@
     ]
   },
   {
-    "name": "/warn without args shows usage",
+    "name": "/trust remove with user",
     "steps": [
       {
-        "send": { "text": "/warn" },
+        "send": { "text": "/trust remove @trusted_user" },
         "expect": [
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Usage: /warn @username [reason]"
+              "text": "🛡️ @trusted_user has been removed from the trust list."
             }
           }
         ]
@@ -32,15 +32,15 @@
     ]
   },
   {
-    "name": "/warn with user only",
+    "name": "/trust without args shows usage",
     "steps": [
       {
-        "send": { "text": "/warn @troll" },
+        "send": { "text": "/trust" },
         "expect": [
           {
             "method": "sendMessage",
             "payload": {
-              "text": "⚠️ Warning recorded for @troll."
+              "text": "Usage: /trust add|remove @username [reason]"
             }
           }
         ]
@@ -48,10 +48,10 @@
     ]
   },
   {
-    "name": "admin:warn button shows instructions",
+    "name": "admin:trust button shows trust list info",
     "steps": [
       {
-        "send": { "callback": "admin:warn" },
+        "send": { "callback": "admin:trust" },
         "expect": [
           {
             "method": "answerCallbackQuery"
@@ -59,7 +59,7 @@
           {
             "method": "editMessageText",
             "payload": {
-              "text": "To warn a user, type:\n/warn @username [reason]\n\nOr reply to a user's message with /warn."
+              "text": "🛡️ Trust list management\n\nCommands:\n/trust add @username [reason]\n/trust remove @username\n\nNo trusted users yet."
             }
           }
         ]

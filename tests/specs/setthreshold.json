@@ -1,0 +1,69 @@
+[
+  {
+    "name": "/setthreshold with type and value",
+    "steps": [
+      {
+        "send": { "text": "/setthreshold flood_threshold 10" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "✅ Threshold updated.\nflood_threshold → 10"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "/setthreshold without args shows usage",
+    "steps": [
+      {
+        "send": { "text": "/setthreshold" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "Usage: /setthreshold <spam_type> <value>\n\nSpam types: link_cooldown, duplicate_threshold, flood_threshold, flood_window"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "/setthreshold with invalid value",
+    "steps": [
+      {
+        "send": { "text": "/setthreshold flood_threshold abc" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "Value must be a non-negative number."
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "admin:setthreshold button shows current thresholds",
+    "steps": [
+      {
+        "send": { "callback": "admin:setthreshold" },
+        "expect": [
+          {
+            "method": "answerCallbackQuery"
+          },
+          {
+            "method": "editMessageText",
+            "payload": {
+              "text": "📊 Spam thresholds:\n\n• Link cooldown: 60000ms\n• Duplicate threshold: 3 messages\n• Flood threshold: 5 messages\n• Flood window: 10000ms\n\nTo change, type:\n/setthreshold <type> <value>\n\nTypes: link_cooldown, duplicate_threshold, flood_threshold, flood_window"
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,14 +1,14 @@
 [
   {
-    "name": "/warn with user and reason",
+    "name": "/ban with user and reason",
     "steps": [
       {
-        "send": { "text": "/warn @spammer spamming links" },
+        "send": { "text": "/ban @spammer 7d spamming" },
         "expect": [
           {
             "method": "sendMessage",
             "payload": {
-              "text": "⚠️ Warning recorded for @spammer.\nReason: spamming links"
+              "text": "🚫 @spammer has been banned.\n7d spamming"
             }
           }
         ]
@@ -16,15 +16,15 @@
     ]
   },
   {
-    "name": "/warn without args shows usage",
+    "name": "/ban without args shows usage",
     "steps": [
       {
-        "send": { "text": "/warn" },
+        "send": { "text": "/ban" },
         "expect": [
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Usage: /warn @username [reason]"
+              "text": "Usage: /ban @username [duration/reason]"
             }
           }
         ]
@@ -32,15 +32,15 @@
     ]
   },
   {
-    "name": "/warn with user only",
+    "name": "/ban with user only",
     "steps": [
       {
-        "send": { "text": "/warn @troll" },
+        "send": { "text": "/ban @spammer" },
         "expect": [
           {
             "method": "sendMessage",
             "payload": {
-              "text": "⚠️ Warning recorded for @troll."
+              "text": "🚫 @spammer has been banned."
             }
           }
         ]
@@ -48,10 +48,10 @@
     ]
   },
   {
-    "name": "admin:warn button shows instructions",
+    "name": "admin:ban button shows instructions",
     "steps": [
       {
-        "send": { "callback": "admin:warn" },
+        "send": { "callback": "admin:ban" },
         "expect": [
           {
             "method": "answerCallbackQuery"
@@ -59,7 +59,7 @@
           {
             "method": "editMessageText",
             "payload": {
-              "text": "To warn a user, type:\n/warn @username [reason]\n\nOr reply to a user's message with /warn."
+              "text": "To ban a user, type:\n/ban @username [duration/reason]\n\nExamples:\n/ban @spammer\n/ban @troll 7d spamming"
             }
           }
         ]

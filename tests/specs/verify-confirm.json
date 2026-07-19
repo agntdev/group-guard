@@ -1,19 +1,53 @@
 [
   {
-    "name": "I'm human",
+    "name": "verify:confirm button verifies the user",
     "steps": [
       {
+        "send": { "callback": "verify:confirm" },
         "expect": [
           {
-            "method": "sendMessage",
+            "method": "answerCallbackQuery"
+          },
+          {
+            "method": "editMessageText",
             "payload": {
-              "text": "Newcomer verification button"
+              "text": "✅ You're verified! Welcome to the group."
             }
           }
-        ],
-        "send": {
-          "callback": "verify:confirm"
-        }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "verify:confirm shows already-verified if already verified",
+    "steps": [
+      {
+        "send": { "callback": "verify:confirm" },
+        "expect": [
+          {
+            "method": "answerCallbackQuery"
+          },
+          {
+            "method": "editMessageText",
+            "payload": {
+              "text": "✅ You're verified! Welcome to the group."
+            }
+          }
+        ]
+      },
+      {
+        "send": { "callback": "verify:confirm" },
+        "expect": [
+          {
+            "method": "answerCallbackQuery"
+          },
+          {
+            "method": "editMessageText",
+            "payload": {
+              "text": "✅ You're already verified."
+            }
+          }
+        ]
       }
     ]
   }

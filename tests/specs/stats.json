@@ -1,14 +1,14 @@
 [
   {
-    "name": "/summary shows no activity when empty",
+    "name": "/stats shows no data when empty",
     "steps": [
       {
-        "send": { "text": "/summary" },
+        "send": { "text": "/stats" },
         "expect": [
           {
             "method": "sendMessage",
             "payload": {
-              "text": "📊 No moderation activity to report yet."
+              "text": "📈 No statistics available yet."
             }
           }
         ]
@@ -16,10 +16,10 @@
     ]
   },
   {
-    "name": "admin:summary button shows no activity",
+    "name": "admin:stats button shows no data",
     "steps": [
       {
-        "send": { "callback": "admin:summary" },
+        "send": { "callback": "admin:stats" },
         "expect": [
           {
             "method": "answerCallbackQuery"
@@ -27,7 +27,7 @@
           {
             "method": "editMessageText",
             "payload": {
-              "text": "📊 No moderation activity to report yet."
+              "text": "📈 No statistics available yet."
             }
           }
         ]

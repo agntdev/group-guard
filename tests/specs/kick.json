@@ -1,14 +1,14 @@
 [
   {
-    "name": "/warn with user and reason",
+    "name": "/kick with user and reason",
     "steps": [
       {
-        "send": { "text": "/warn @spammer spamming links" },
+        "send": { "text": "/kick @spammer spamming" },
         "expect": [
           {
             "method": "sendMessage",
             "payload": {
-              "text": "⚠️ Warning recorded for @spammer.\nReason: spamming links"
+              "text": "👢 @spammer has been kicked.\nReason: spamming"
             }
           }
         ]
@@ -16,15 +16,15 @@
     ]
   },
   {
-    "name": "/warn without args shows usage",
+    "name": "/kick without args shows usage",
     "steps": [
       {
-        "send": { "text": "/warn" },
+        "send": { "text": "/kick" },
         "expect": [
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Usage: /warn @username [reason]"
+              "text": "Usage: /kick @username [reason]"
             }
           }
         ]
@@ -32,15 +32,15 @@
     ]
   },
   {
-    "name": "/warn with user only",
+    "name": "/kick with user only",
     "steps": [
       {
-        "send": { "text": "/warn @troll" },
+        "send": { "text": "/kick @troll" },
         "expect": [
           {
             "method": "sendMessage",
             "payload": {
-              "text": "⚠️ Warning recorded for @troll."
+              "text": "👢 @troll has been kicked."
             }
           }
         ]
@@ -48,10 +48,10 @@
     ]
   },
   {
-    "name": "admin:warn button shows instructions",
+    "name": "admin:kick button shows instructions",
     "steps": [
       {
-        "send": { "callback": "admin:warn" },
+        "send": { "callback": "admin:kick" },
         "expect": [
           {
             "method": "answerCallbackQuery"
@@ -59,7 +59,7 @@
           {
             "method": "editMessageText",
             "payload": {
-              "text": "To warn a user, type:\n/warn @username [reason]\n\nOr reply to a user's message with /warn."
+              "text": "To kick a user, type:\n/kick @username [reason]\n\nThis removes the user from the group."
             }
           }
         ]

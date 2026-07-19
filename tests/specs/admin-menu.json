@@ -1,0 +1,21 @@
+[
+  {
+    "name": "admin menu button shows admin tools",
+    "steps": [
+      {
+        "send": { "callback": "admin:menu" },
+        "expect": [
+          {
+            "method": "answerCallbackQuery"
+          },
+          {
+            "method": "editMessageText",
+            "payload": {
+              "text": "🔧 Admin tools — pick an action:"
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

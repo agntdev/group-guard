@@ -1,14 +1,14 @@
 [
   {
-    "name": "/warn with user and reason",
+    "name": "/mute with user and duration",
     "steps": [
       {
-        "send": { "text": "/warn @spammer spamming links" },
+        "send": { "text": "/mute @spammer 1h" },
         "expect": [
           {
             "method": "sendMessage",
             "payload": {
-              "text": "⚠️ Warning recorded for @spammer.\nReason: spamming links"
+              "text": "🔇 @spammer has been muted for 1h."
             }
           }
         ]
@@ -16,15 +16,15 @@
     ]
   },
   {
-    "name": "/warn without args shows usage",
+    "name": "/mute without args shows usage",
     "steps": [
       {
-        "send": { "text": "/warn" },
+        "send": { "text": "/mute" },
         "expect": [
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Usage: /warn @username [reason]"
+              "text": "Usage: /mute @username [duration]"
             }
           }
         ]
@@ -32,15 +32,15 @@
     ]
   },
   {
-    "name": "/warn with user only",
+    "name": "/mute with user only",
     "steps": [
       {
-        "send": { "text": "/warn @troll" },
+        "send": { "text": "/mute @troll" },
         "expect": [
           {
             "method": "sendMessage",
             "payload": {
-              "text": "⚠️ Warning recorded for @troll."
+              "text": "🔇 @troll has been muted for indefinite."
             }
           }
         ]
@@ -48,10 +48,10 @@
     ]
   },
   {
-    "name": "admin:warn button shows instructions",
+    "name": "admin:mute button shows instructions",
     "steps": [
       {
-        "send": { "callback": "admin:warn" },
+        "send": { "callback": "admin:mute" },
         "expect": [
           {
             "method": "answerCallbackQuery"
@@ -59,7 +59,7 @@
           {
             "method": "editMessageText",
             "payload": {
-              "text": "To warn a user, type:\n/warn @username [reason]\n\nOr reply to a user's message with /warn."
+              "text": "To mute a user, type:\n/mute @username [duration]\n\nExamples:\n/mute @spammer 1h\n/mute @troll 24h"
             }
           }
         ]

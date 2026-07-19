@@ -1,0 +1,53 @@
+[
+  {
+    "name": "/setrules with quoted message",
+    "steps": [
+      {
+        "send": { "text": "/setrules \"Be respectful. No spam.\"" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "✅ Rules updated."
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "/setrules without args shows usage",
+    "steps": [
+      {
+        "send": { "text": "/setrules" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "Usage: /setrules \"Your rules text\""
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "admin:setrules button shows current rules",
+    "steps": [
+      {
+        "send": { "callback": "admin:setrules" },
+        "expect": [
+          {
+            "method": "answerCallbackQuery"
+          },
+          {
+            "method": "editMessageText",
+            "payload": {
+              "text": "Current rules:\n\"Be respectful. No spam. No links from new accounts.\"\n\nTo change them, type:\n/setrules \"Your new rules\""
+            }
+          }
+        ]
+      }
+    ]
+  }
+]
